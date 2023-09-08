@@ -1,0 +1,692 @@
+
+:root {
+    --first-color: black;
+	--white: #fff;
+}
+
+
+.my-section {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    display: block;
+
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px 5px rgba(0, 0, 0, .5);
+
+    padding: 20px;
+    width: 100%;
+    max-width: 600px;
+}
+
+#notHaveMenu h3 {
+    text-align: center;
+    font-size: 2.2rem;
+    padding-bottom: 20px;
+}
+
+.form-group {
+    padding-bottom: 15px;
+}
+
+#editMenu h3 {
+    text-align: center;
+    font-size: 2.2rem;
+}
+
+#editMenu div.row {
+    padding: 14px 6px;
+}
+
+h1 {
+    text-align: left;
+    font-size: 2.7rem;
+}
+
+
+.editMenu-form-group input[type=submit] {
+    color: white;
+    width: 100%;
+    text-align: center;
+    font-size: 1.2rem;
+    border: 0px;
+}
+
+.editMenu-form-group input[type=file] {
+    display: none;
+}
+.carica-image-label {
+    text-align: center;
+    color: white;
+    background-color: var(--first-color);
+    font-size: 1rem;
+    padding: 10px;
+
+    margin-top: 10px;
+    margin-bottom: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.editMenu-form-group input[type=text] {
+    color: black;
+    width: 100%;
+    text-align: center;
+    font-size: 1.5rem;
+    border: 0px;
+}
+
+::placeholder {
+    color: black;
+}
+
+.editMenu-label p {
+    font-size: 1.2rem;
+    vertical-align: center;
+    height: 100%;
+}
+
+
+.menu-image-profile img {
+    height: 150px;
+    width: 150px;
+
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+
+    border: 2px solid black;
+    border-radius: 100%;
+}
+
+
+
+.menu-up-button {
+    border: 2px solid var(--first-color);
+    border-radius: 100%;
+}
+.menu-up-button .fa {
+    color: var(--first-color);
+    font-size: 1.4rem;
+    padding: 5px;
+}
+
+
+.empty-image-profile {
+    height: 150px;
+    width: 150px;
+
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+
+    border: 2px solid black;
+    border-radius: 100%;
+}
+
+.line {
+    border-bottom: 2px solid black;
+    width: 90%;
+
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.inline-form input[type=text]{
+    color: black;
+    width: 100%;
+    text-align: left;
+    font-size: 1.3rem;
+    padding: 5px 10px;
+    border: 0px;
+}
+
+.inline-form input[type=text]::placeholder{
+    color: gray;
+}
+
+
+
+
+/* CSS relativo al menu */
+.menu-categories details {
+    width: 100%;
+}
+
+.menu-categories details summary {
+    width: 100%;
+
+    padding: 0.5rem 0;
+    border-top: 1px solid black;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: black;
+}
+
+details summary::before {
+    content: "+";
+    color: black;
+    position: unset;
+    font-size: 1.75rem;
+    padding-right: 15px;
+    line-height: 0;
+    margin-top: 0.75rem;
+    right: 0;
+    font-weight: 200;
+    transform-origin: center;
+    transition: 200ms linear;
+}
+
+details[open] summary:after {
+    transform: rotate(45deg);
+    font-size: 2rem;
+}
+
+
+details>summary {
+    list-style: none;
+}
+
+details summary::-webkit-details-marker {
+    display: none;
+}
+
+
+details[open] summary~* {
+    animation: open 0.6s ease-in-out;
+}
+
+@keyframes open {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.menu-lista-piatti {
+    padding-left: 20px;
+    padding-bottom: 5px;
+}
+
+.menu-single-piatto h4 {
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin-bottom: 0 !important;
+    color: black;
+    text-align: left !important;
+}
+
+.menu-single-piatto h4 price::before {
+    padding-left: 5px;
+    padding-right: 5px;
+    content: '.......';
+}
+
+.menu-single-piatto h4 price {
+    padding-right: 10px;
+}
+
+.menu-single-piatto h4 price::after {
+    padding-left: 2px;
+    content: '€';
+}
+
+.menu-single-piatto p {
+    color: #646464;
+    font-size: 1.2rem;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 5px !important;
+    margin-bottom: 0 !important;
+}
+
+.menu-image-profile img {
+    height: 220px;
+    width: 220px;
+
+    border-radius: 100%;
+    border: 2px solid black;
+
+    margin-bottom: 30px;
+
+    margin-right: auto !important;
+    margin-left: auto !important;
+    display: block;
+}
+
+.menu-delete-button {
+    font-weight: bold;
+    color: red;
+    padding: 0 5px;
+    text-decoration: none;
+    opacity: 0.8;
+}
+
+.menu-delete-button:hover {
+    color: gray;
+    text-decoration: none;
+}
+
+.border-topp {
+    border-top: 1px solid black;
+}
+
+
+.new-piatto-form {
+    border: 0px solid rgb(245, 245, 245);
+    padding: 2px;
+}
+
+.new-piatto-form input[type=text] {
+    text-align: left;
+    color: black;
+    border: 2px solid var(--first-color);
+    font-weight: 400;
+    margin: 5px;
+    padding: 5px;
+    font-size: 1.2rem;
+    width: 100%;
+}
+
+.new-piatto-form input[type=number] {
+    text-align: left;
+    color: black;
+    border: 2px solid var(--first-color);
+    font-weight: 400;
+    margin: 5px;
+    padding: 5px;
+    font-size: 1.2rem;
+    width: 100%;
+}
+
+.new-piatto-form input[type=text]::placeholder {
+    text-align: left;
+    color: gray;
+    font-weight: 300;
+}
+
+.new-piatto-form input[type=submit] {
+    text-align: center;
+    color: white !important;
+    background-color: var(--first-color);
+    border: 2px solid var(--first-color);
+    border-radius: 8px;
+    font-weight: 400;
+    margin: 5px;
+    padding: 5px;
+    font-size: 1.2rem;
+    width: 100%;
+}
+
+.logout-link {
+    color: white !important;
+    text-decoration: underline;
+    font-size: 20px;
+}
+
+
+.footer {
+    width: 100%;
+    margin-top: 50px;
+    text-align: center;
+    background-color: var(--first-color);
+    color: white;
+}
+
+.footer p {
+    padding-bottom: 20px;
+    padding-top: 40px;
+}
+
+
+
+.form-random {
+    width: 75%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.random-select-submenu {
+    padding: 0px 45px;
+}
+.random-select-submenu select {
+    width: 100%;
+    padding: 5px;
+    margin: 10px;
+    border-radius: 10px;
+    border: 2px black solid;
+    font-size: 1.2rem;
+}
+
+.random-select-submenu input[type=submit] {
+    padding: 10px;
+    background-color: var(--first-color);
+    border: 2px var(--first-color) solid;
+    color: white;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    font-size: 1.2rem;
+    margin-top: 10px;
+}
+
+.random-select-submenu input[type=submit]:hover {
+    text-decoration: underline;
+}
+
+.update-price-input {
+    width: 80% !important;
+    font-size: 1.2rem !important;
+    border: 2px var(--first-color) solid !important;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    color: gray !important;
+
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+.update-price-input:hover,
+.update-price-input:focus-visible {
+    border: 2px var(--first-color) solid !important;
+}
+.update-price-input::placeholder {
+    color: gray !important;
+}
+
+.bg-first-color {
+    background-color: var(--first-color);
+}
+
+.nav-link {
+    color: white !important;
+    font-size: 1.3rem !important;
+}
+
+#logout-link {
+    background-color: white !important;
+    color: var(--first-color) !important;
+    padding: 5px 15px !important;
+    border-radius: 10px;
+    margin-left: 10px;
+}
+
+
+.account-maps-iframe iframe {
+    border-radius: 15px;
+    width: 100%;
+    height: 50vh;
+    max-height: 600px;
+}
+
+#maps-settings input[type=submit] {
+    background-color: var(--first-color);
+    color: white;
+    border: 2px solid var(--first-color);
+    font-size: 1.2rem;
+}
+
+#maps-settings input[type=text] {
+    font-size: 1.2rem;
+    padding-left: 5px;
+}
+
+
+
+
+
+
+
+
+/* Immagine di profilo e copertina */
+.container-image-profile {
+    width: 100%;
+    height: 220px;
+    position: relative;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.menu-image-profile {
+    padding-top: 120px;
+    border-radius: 20px;
+}
+
+.menu-image-profile img {
+    height: 180px;
+    width: 180px;
+
+    border-radius: 100%;
+    border: 2px solid white;
+
+    margin-bottom: 15px;
+
+    margin-right: auto !important;
+    margin-left: auto !important;
+    display: block;
+}
+
+
+.edit-copertina-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 40px;
+    height: 40px;
+    background-color: #9b9b9ba6;
+    border-radius: 100%;
+}
+
+.edit-copertina-button #edit-copertina-icon {
+    color: white;
+    font-size: 28px;
+    padding-left: 9px;
+    padding-top: 6px;
+}
+/* FINE immagine di profilo e copertina */
+
+
+
+.btn-primary {
+    background-color: var(--first-color);
+    color: white;
+}
+.btn-primary:hover {
+    background-color: var(--first-color);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* QUI INIZIANO LE MIE STRONZATE */
+
+@font-face {
+	font-family: myFirstFont;
+	src: url(../fonts/my-fonts/Foodpacker.otf);
+}
+
+@font-face {
+	font-family: menuFont;
+	src: url(../fonts/my-fonts/coolvetica_rg.otf);
+}
+
+
+body {
+	margin: 0;
+	font-family: menuFont;
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+	text-align: left;
+	background-color: #fff;
+}
+
+
+.logo-font {
+	font-family: myFirstFont !important;
+}
+
+
+.loading {
+	position: fixed;
+    width: 100%;
+    height: 100vh;
+    background: #94634a no-repeat center;
+    z-index: 100000;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.myMain {
+	padding-bottom: 50px;
+	padding-top: 50px;
+	color: black;
+}
+
+.myMain h1 {
+	color: black;
+}
+
+.myMain p {
+	font-size: 1.5rem;
+}
+
+.loader {
+	position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background: white no-repeat center;
+    z-index: 5;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+	background-image: url(../images/loader_3.gif);
+	background-color: #fbfbfb;
+}
+
+.ftco-navbar-light {display: none;}
+
+.my-full-banner {
+    color: white !important;
+    background-color: var(--first-color);
+    width: 100%;
+    padding: 30px 0;
+    margin: 30px 0;
+}
+
+.my-full-banner h1 {
+	color: white !important;
+	font-size: 3.5rem;
+	font-weight: 500;
+
+}
+
+.price {
+	font-weight: 700; 
+	font-size: 2.3rem;
+	color: green;
+}
+
+.prezzo-tagliato {
+	color: red;
+	font-weight: 500;
+	font-size: 1.8rem;
+	text-decoration: line-through;
+}
+
+
+iframe {
+	margin: auto !important;
+}
+
+
+/* message view */
+#message-view {
+	display: none;
+}
+
+#message-view p {
+	margin: 0;
+}
+
+#success-message, #error-message {display: none;}
+
+.success-message {
+	color: green;
+}
+
+.error-message {
+	color: red;
+}
+
+.oi-menu {
+	color: white !important;
+	font-size: 1.3rem;
+}
+
+
+.pro-ul {
+	list-style-type: none;
+	padding-left: 10px;
+}
+
+.pro-li {
+	color: #155724;
+	font-size: 1.2rem;
+}
+
+.pro-li:before {
+	content: "+";
+	padding-right: 5px;
+}
+
+
+.back-home-link {
+	color: var(--first-color);
+	font-size: 20px;
+}
+.back-home-link::before {
+	content: "<- ";
+}
+.back-home-link:hover {
+	text-decoration: none !important;
+	font-size: 24px;
+}
+
+.login-bg {
+	background: rgb(19,55,163);
+	background: linear-gradient(90deg, rgba(19,55,163,1) 0%, rgba(232,205,13,1) 44%, rgba(244,0,255,1) 100%);
+		
+	height: 100vh;
+}
+
+.form-col {
+	background-color: var(--white);
+	border-radius: 15px;
+	padding: 40px;
+	margin: 0px 20px;
+}
+
+
+#page-content-wrapper {
+    min-width: 100%;
+}

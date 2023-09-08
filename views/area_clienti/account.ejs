@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="Tobia Scivoletto" />
+    <title>Modifica menù</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="images/favicon.png" />
+
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" >
+    <link href="/css/mystyle.css" rel="stylesheet" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" 
+        rel="stylesheet"  type='text/css'>
+
+</head>
+
+
+<body>
+    <div class="d-flex" id="wrapper">
+
+
+        <!-- Page content wrapper-->
+        <div id="page-content-wrapper">
+
+            <!-- Top navigation-->
+            <nav class="navbar navbar-expand-lg navbar-light bg-first-color border-bottom">
+                <div class="container-fluid">
+
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation"><span
+                            class="navbar-toggler-icon"></span></button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/account">Account</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/account/prenotazioni">Prenotazioni</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/account/orari">Orari di Apertura</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="logout-link" href="/auth/logout">
+                                    Logout
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+
+            
+            <div class="container-fluid">
+                <!-- Error Component -->
+                <div class="row my-section" id="message-view">
+                    <p class="text-center error-message" id="error-message">
+                        Errore dutante l'operazione :(
+                    </p>
+                    <p class="text-center success-message" id="success-message">
+                        Operazione eseguita con successo!
+                    </p>
+                </div>
+                <!-- End Error Component -->
+
+
+                <div class="row my-section" id="info_account">
+                    <h1 class="text-center">Account</h1>
+                    <p class="text-center">Email: <span style="color: green; font-weight: 200;"><%= user.email %></span></p>
+                    <% if (have_menu) { %>
+                        <button class="btn btn-primary">
+                            <a style="color: white;" href="/menu/<%= menu.url %>" target="_blank">
+                                Visualizza Menù
+                                <i class="fa fa-external-link" aria-hidden="true"></i>
+                            </a>
+                        </button>
+                    <% } %>
+                </div>
+
+
+                <div class="row my-section" id="modifica_menu">
+
+                    <% if (have_menu) { %>
+
+                        <div id="editMenu">
+                            <h3>Modifica Menu</h3>
+
+                            <div class="row">
+                                <div class="col-12 editMenu-form-group">
+
+
+                                    <form method="post" action="/api/menu/uploadCopertina" class="d-none"
+                                        enctype="multipart/form-data" id="upload-copertina-form">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label for="newCopertinaInput" class="carica-image-label">
+                                                    Seleziona (max 500kb)
+                                                </label>
+                                                <input type="file" name="copertina_image" id="newCopertinaInput">
+                                            </div>
+                                            <div class="col-6">
+                                                <label for="newCopertinaSubmit" class="carica-image-label">
+                                                    Carica Copertina
+                                                </label>
+                                                <input type="submit" style="display: none;"
+                                                    id="newCopertinaSubmit">
+                                            </div>
+                                        </div>
+                                    </form>
+
+
+                                    <div class="container-image-profile" 
+                                        <% if (menu.copertina_image) { %>
+                                            style="background-image: url('/images/copertine/<%= menu.copertina_image %>')"
+                                        <% } else { %>
+                                            style="background-image: url('/images/default-copertina.jpg')"
+                                        <% } %>
+                                        id="container-image-profile">
+                                        <div class="edit-copertina-button"
+                                            id="edit-copertina-button">
+                                            <i class="fa fa-pencil" id="edit-copertina-icon"></i>
+                                        </div>
+
+                                        <div class="menu-image-profile">
+                                            <% if (menu.profile_image) { %>
+                                                <img src="/api/menu/getProfileImage/<%= menu._id %>" alt="<%= menu.name %>">
+                                            <% } else { %>
+                                                <img src="/images/default-profile.jpg" alt="<%= menu.name %>">
+                                            <% } %>
+                                        </div>
+                                    </div>
+
+
+                                    <form method="post" action="/api/menu/uploadImage" id="upload-logo-form"
+                                        enctype="multipart/form-data" style="padding-top: 70px;">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label for="newImageInput" class="carica-image-label">
+                                                    Seleziona (max 500kb)
+                                                </label>
+                                                <input type="file" name="profile_image" id="newImageInput">
+                                            </div>
+                                            <div class="col-6">
+                                                <label for="newImageSubmit" class="carica-image-label">
+                                                    Carica
+                                                </label>
+                                                <input type="submit" style="display: none;"
+                                                    id="newImageSubmit">
+                                            </div>
+                                        </div>
+                                    </form>
+
+
+                                </div>
+                            </div>
+
+                            <div class="line"></div>
+
+                            <div class="row">
+                                <div class="col-12 editMenu-form-group">
+
+                                    <form action="/api/menu/nameUpdate" method="post">
+                                        <input type="text" name="name" placeholder="<%= menu.name %>" id="newNameInput">
+                                        <input type="hidden" name="menu_id" value="<%= menu._id %>">
+                                    </form>
+                                </div>
+
+                            </div>
+                            <!--   -->
+                            <div class="line"></div>
+
+                            <div class="row">
+                                <div class="col-12 editMenu-form-group">
+
+                                    <div class="menu-categories" id="menu-categories" data-menu-id="<%= menu._id %>">
+                                        <!-- Menu Component -->
+                                    </div>
+
+                                    <form action="/api/menu/createSubMenu" method="post" class="inline-form border-topp pt-2">
+                                        <input required type="text" name="name" placeholder="Nuova categoria" style="width: 75%;">
+                                        <input type="hidden" name="menu_id" value="<%= menu._id %>">
+                                        <input type="submit" value="Crea" class="btn btn-primary" style="width: 22%;">
+                                    </form>
+
+                                </div>
+                            </div>
+
+                            <!--   -->
+                            <div class="pb-4"></div>
+                        </div>
+
+
+
+                        <% } else { %>
+                            <div class="row" id="notHaveMenu">
+                                <h3>Opss, non hai un menu... Crearne uno adesso</h3>
+                                <form method="post" id="createMenuForm" action="/api/menu/createMenu">
+                                    <div class="form-group">
+                                        <label for="inputNomeAttivita">Nome attività</label>
+                                        <input required type="text" name="name" class="form-control" id="inputNomeAttivita"
+                                            placeholder="Nome">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Link Menu</label>
+                                        <input required type="text" name="url" class="form-control" id="link-input"
+                                            aria-describedby="emailHelp" placeholder="Link">
+                                        <small id="emailHelp" class="form-text" style="color: green;">
+                                            Il link del tuo menù sarà localhost:8080/menu/<span id="link-preview" 
+                                                style="text-decoration: underline; color: green;">
+                                            </span>
+                                        </small>
+                                    </div>
+                                    
+                                    <button type="submit" class="btn btn-primary mx-auto d-block">Crea Menu</button>
+                                </form>
+                            </div>
+                        <% } %>
+                </div>
+
+                
+                <% if ( have_menu ) { %>
+                    <div class="row my-section" id="random-menu-editor">
+                        <div class="random-menu-button">
+                            <div class="row">
+                                <div class="col-12 editMenu-label">
+                                    <h3 class="text-center">Non sai cosa scegliere?</h3>
+                                </div>
+                            </div>
+                            <div class="row py-2">
+                                <div class="col-12 editMenu-form-group">
+                                    <% if ( menu.random_menu == true ) { %>
+                                        <form action="/api/menu/random-menu/changeActive" method="post" class="form-random">
+                                            <input type="submit" value="Disattiva" class="btn btn-primary">
+                                            <input type="hidden" name="menu_id" value="<%= menu._id %>">
+                                        </form>
+                                    <% } else { %>
+                                        <form action="/api/menu/random-menu/changeActive" method="post" class="form-random">
+                                            <input type="submit" value="Attiva" class="btn btn-primary">
+                                            <input type="hidden" name="menu_id" value="<%= menu._id %>">
+                                        </form>
+                                    <% } %>
+                                </div>
+                            </div>
+                            <% if ( menu.random_menu == true ) { %>
+                                <div class="row py-3">
+                                    <div class="col-12">
+                                        <h4 class="text-center">Seleziona Categoria</h4>
+                                        <p class="text-center" style="color: gray; font-size: 14px;">
+                                            *I piatti verranno scelti casualmente dalla categoria selezionata
+                                        </p>
+                                    </div>
+                                    <div class="col-12">
+                                        <form action="/api/menu/random-menu/changeSubmenu" method="post" class="random-select-submenu">
+                                            <input type="hidden" name="menu_id" value="<%= menu._id %>">
+                                            <select name="submenu_id" id="select-submenu">
+                                            </select>
+                                            <input type="submit" value="Salva">
+                                        </form>
+                                    </div>
+                                    <div class="col-12 pt-3">
+                                        <p class="text-center" style="font-size: 1.6rem;">
+                                            In uso: 
+                                            <span id="random-submenu-name" style="font-weight: bold;"
+                                                data-submenu-id="<%= menu.random_submenu %>">
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
+                            <% } %>
+                        </div>
+                    </div>
+
+
+                    <div class="row my-section" id="maps-settings">
+                        <div class="col-12">
+                            <h2>Mappa e Indicazioni📍</h2>
+                        </div>
+    
+                        <div class="col-12 py-3 text-center">
+                            <% if (menu.mappa) { %>
+                                <a href="/api/mappa/change_enable/<%= menu._id %>" style="color: red;">Disattiva Mappa</a>
+                            <% } else { %>
+                                <a href="/api/mappa/change_enable/<%= menu._id %>" style="color: green;">Attiva Mappa</a>
+                            <% } %>
+                        </div>
+                        
+                        <% if (menu.mappa) { %>
+                            <div class="col-12">
+                                <div class="account-maps-iframe">
+                                    <iframe 
+                                        src="<%= menu.mappa_iframe_link %>" 
+                                        style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                </div>
+                            </div>
+    
+                            <div class="col-12 pt-5">
+                                <!-- Cambio indirizzo -->
+                                <form action="/api/mappa/address/<%= menu._id %>" method="POST">
+                                    <input type="text" name="new_address" required placeholder="<%= menu.mappa_address %>" style="width: 70%;">
+                                    <input type="submit" value="Imposta" style="width: 25%;">
+                                </form>
+                            </div>
+                            
+    
+                            <div class="col-12 pt-3">
+                                <form action="/api/mappa/iframe_link/<%= menu._id %>" method="POST">
+                                    <input type="text" name="mappa_iframe_link" required placeholder="Inserisci il link iframe Google Maps" style="width: 70%;">
+                                    <input type="submit" value="Imposta" style="width: 25%;">
+                                </form>
+                            </div>
+    
+    
+                            <div class="col-12 pt-4">
+                                <form action="/api/mappa/button_link/<%= menu._id %>" method="POST">
+                                    <input type="text" name="mappa_button_link" required placeholder="Inserisci il link di indicazioni Google Maps" style="width: 70%;">
+                                    <input type="submit" value="Imposta" style="width: 25%;">
+                                </form>
+                            </div>
+                            <div class="col-12 pb-2">
+                                <a href="<%= menu.mappa_button_link %>" target="_blank" style="color: gray; font-size: 0.9rem;">
+                                    <%= menu.mappa_button_link %>
+                                </a>
+                            </div>
+    
+                        <% } %>
+                    </div>
+                <% } %>
+                
+                
+            </div>
+
+
+
+            <div class="footer">
+                <div class="container">
+                    <div class="row">
+                        <p>Copyright 2050</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/scripts.js"></script>
+    <script src="/js/message.js"></script>
+
+    
+    <% if (have_menu) { %>
+        <script src="/js/account.js"></script>
+
+        <% if ( menu.random_menu == true ) { %>
+            <script>
+                $.getJSON("/api/menu/getMenuFromId/advancedMode/<%= menu._id %>", function (res) {
+                    // carica i vari submenu per la selezione del random menu
+                    var str = "";
+                    for (var item of res.categorie) {
+                        str += "<option value='" + item._id +  "'>" + item.name + "</option>";
+                    }
+                    document.getElementById("select-submenu").innerHTML = str;
+                });
+
+                $.getJSON("/api/menu/submenu/getName/<%= menu.random_submenu %>", function (res) {
+                    document.getElementById("random-submenu-name").innerHTML = res.name;
+                });
+            </script>
+        <% } %>
+    <% } %>
+
+
+</body>
+
+</html>

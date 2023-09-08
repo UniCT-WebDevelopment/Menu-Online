@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <%- include('../partials/head') %>
+    <link rel="stylesheet" href="/css/menu.css">
+</head>
+
+<body>
+
+
+    <div class="container-image-profile"
+        <% if (menu.copertina_image) { %>
+            style="background-image: url('/images/copertine/<%= menu.copertina_image %>')"
+        <% } else { %>
+            style="background-image: url('/images/default-copertina.jpg')"
+        <% } %>
+        id="">
+
+        <div class="menu-image-profile">
+            <% if (menu.profile_image) { %>
+                <img src="/api/menu/getProfileImage/<%= menu._id %>" alt="<%= menu.name %>">
+            <% } else { %>
+                <img src="/images/default-profile.jpg" alt="<%= menu.name %>">
+            <% } %>
+        </div>
+    </div>
+
+    <section class="menu" id="menu" style="padding-top: 90px;">
+        <div class="menu-name">
+            <h1><%= menu.name %></h1>
+        </div>
+
+
+        <% if (orari_present) { %>
+            <% if (orari.enable) { %>
+                <div id="orari" data-orari-id="<%= orari._id %>">
+
+                    <p class="orari-apertura-text">
+                        <span id="orari-apertura-text-status" class=""></span>
+
+                        <a data-toggle="modal" data-target="#orari-modal">
+                            <i class="fa fa-info-circle" id="info-orari" style="color: gray;" aria-hidden="true"></i>
+                        </a>
+                        
+                    </p>
+
+                    <p id="orari-apertura-text-orario" class="orari-apertura-text"></p>
+
+                </div>
+                
+                <%- include('../partials/orari-apertura-menu') %>
+            <% } %>
+        <% } %>
+
+
+        <div class="menu-categories" id="menu-categories">
+        </div>
+
+        <% if (menu.random_menu) { %>
+            <div id="random-menu" class="pt-5">
+                <h2>Non sai cosa scegliere?</h2>
+                <div id="random-results">
+                    <div class="row">
+                        <div class="col-12">
+                            <h4 class="text-center" id="random-name"></h4>
+                        </div>
+                        <div class="col-12">
+                            <p id="random-description"></p>
+                        </div>
+                        <div class="col-12">
+                            <p class="text-center" id="random-price"></p>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="random-loader-container" id="random-loader-container">
+                    <img src="../images/loader_min.gif" class="img-fluid">
+                </div>
+                <button id="consigliami-btn">Consigliami qualcosa!</button>
+            </div>
+        <% } %>
+
+
+        <% if (prenotatore_present) { %>
+            <% if (prenotatore.enable) { %>
+                <!-- Prenotazioni -->
+                <div class="prenotatore" id="prenotatore-id">
+                    <h3>Prenota ora!</h3>
+
+                    <% if (prenotatore.call) { %>
+                        <a href="tel:<%= prenotatore.call_number %>" target="_blank">
+                            <button class="button-component btn-prenotatore">
+                                Chiama
+                                <i class="fa fa-phone" aria-hidden="true"></i>
+                            </button>
+                        </a>
+                    <% } %>
+
+                    <% if (prenotatore.whatsapp) { %>
+                        <a href="https://wa.me/<%= prenotatore.whatsapp_number %>" target="_blank">
+                            <button class="button-component btn-prenotatore" style="background-color: #25D366; border-color: #25D366;">
+                                Whatsapp
+                                <i class="fa fa-whatsapp" aria-hidden="true"></i>
+                            </button>
+                        </a>
+                    <% } %>
+                </div>
+                <!-- Fine Prenotazioni -->
+            <% } %>
+        <% } %>
+
+
+
+        <% if (menu.mappa) { %>
+            <div class="maps-container pt-5">
+                <div class="maps-header">
+                    <h1 class="text-center">Ci trovi qui📍</h1>
+                    <p class="text-center"><%= menu.mappa_address %></p>
+                </div>
+                <div class="maps-iframe">
+                    <iframe src="<%= menu.mappa_iframe_link %>" 
+                        style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                <div class="maps-button">
+                    <a href="<%= menu.mappa_button_link %>" target="_blank">
+                        <button class="button-component">
+                            Indicazioni
+                            <i class="fa fa-map-pin" aria-hidden="true"></i>
+                        </button>
+                    </a>
+                </div>
+            </div>
+        <% } %>
+        
+            
+        
+    </section>
+    
+
+
+    <%- include('../partials/javascript') %>
+    <script src="/js/Menu.js"></script>
+
+
+    <script>
+        $.getJSON("/api/menu/getMenuFromId/<%= menu._id %>", function (res) {
+            
+            var menuCategories = document.getElementById('menu-categories');
+
+            for (let i = 0; i < res.categorie.length; i++) {
+                // console.log(res.categorie[i].name);
+                var newDetails = document.createElement('details');
+                var newSummary = document.createElement('summary');
+                newSummary.innerHTML = res.categorie[i].name;
+
+                if(i == 0) { newSummary.classList.add("menu-categories-first"); }
+
+                var newListaPiatti = document.createElement('div');
+                newListaPiatti.classList.add('menu-lista-piatti');
+
+                for (let j = 0; j < res.categorie[i].piatti.length; j++) {
+                    var tempSinglePiatto = document.createElement('div');
+                    tempSinglePiatto.classList.add('menu-single-piatto');
+
+                    // aggiungo nome piatto e prezzo
+                    var tempH4 = document.createElement('h4');
+                    tempH4.innerHTML = res.categorie[i].piatti[j].name;
+                    var tempPrice = document.createElement('price');
+                    tempPrice.innerHTML = res.categorie[i].piatti[j].price;
+                    tempH4.appendChild(tempPrice);
+                    tempSinglePiatto.appendChild(tempH4);
+
+                    // aggiungo descrizione piatto
+                    var tempP = document.createElement('p');
+                    tempP.innerHTML = res.categorie[i].piatti[j].description;
+                    tempSinglePiatto.appendChild(tempP);
+
+                    newListaPiatti.appendChild(tempSinglePiatto);
+                }
+
+                newDetails.appendChild(newSummary);
+                newDetails.appendChild(newListaPiatti);
+
+                menuCategories.appendChild(newDetails);
+            }
+
+        });
+
+    </script>
+
+    <% if (menu.random_menu) { %>
+        <script>
+            $('#random-results').hide();
+            $('#random-loader-container').hide();
+
+            $("#consigliami-btn").click(function() {
+                $('#random-results').hide();
+                $('#random-loader-container').fadeIn("fast");
+                $.getJSON("/api/menu/random-menu/getRandomPiatto/<%= menu._id %>", function (res) {
+                    $('#random-loader-container').fadeOut(100);  // nascondi loader
+
+                    var containerdiv = document.getElementById('random-results');
+                    containerdiv.classList.remove('d-none');
+                    var name = document.getElementById('random-name');
+                    name.innerHTML = res.name;
+                    var price = document.getElementById('random-price');
+                    price.innerHTML = res.price;
+                    var description = document.getElementById('random-description');
+                    description.innerHTML = res.description;
+                    $('#random-results').fadeIn("slow");
+                });
+                
+            });
+        </script>
+    <% } %>
+
+</body>
+
+</html>
